@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background: linear-gradient(
+    -45deg,
+    #d8f3dc,
+    #b7e4c7,
+    #95d5b2,
+    #74c69d
+  );
+
+  background-size: 300% 300%;
+  animation: gradientMove 30s ease-in-out infinite;
+}
+
+.navbar {
+  background: #2e7d32;
+  color: white;
+  padding: 20px 50px;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.8;
+  color: #555;
+  font-size: 18px;
+}
+
+.button-group {
+  margin-top: 35px;
+}
+
+.signup-btn,
+.signin-btn {
+  padding: 12px 30px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-btn {
+  background: #2e7d32;
+  color: white;
+}
+
+.signin-btn {
+  background: white;
+  border: 2px solid #2e7d32;
+  color: #2e7d32;
+}
+
+.about {
+  padding: 60px;
+  text-align: center;
+}
+
+.about h2 {
+  margin-bottom: 30px;
+  color: #2e7d32;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background: white;
+  width: 280px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.feature-card h3 {
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  color: #666;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 400px;
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  color: #2e7d32;
+}
+
+.role-btn {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #e8f5e9;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.role-btn:hover {
+  background: #c8e6c9;
+}
+
+.close-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2e7d32;
+  color: white;
+  cursor: pointer;
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
