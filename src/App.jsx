@@ -1,102 +1,60 @@
-import "./App.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import Home from "./pages/home";
+import AuthForm from "./pages/login";
+
+// Import file dashboard
+import DonorDashboard from "./pages/dashboard-don";
+import VolunteerDashboard from "./pages/dashboard-vol";
+import BeneficiaryDashboard from "./pages/dashboard-ben";
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const [action, setAction] = useState("");
+  // 1. Awal buka aplikasi, kunci ke halaman utama ("home")
+  const [currentPage, setCurrentPage] = useState("home");
+  const [userRole, setUserRole] = useState("donor");
+
+  // 2. Fungsi saat user sukses login dari AuthForm
+  const handleLoginSuccess = (selectedRole) => {
+    setUserRole(selectedRole);
+    setCurrentPage("dashboard"); // Pindah ke dashboard setelah isi form
+  };
+
+  // 3. Fungsi untuk mengarahkan dari Home ke Form Login
+  const handleGoToLogin = () => {
+    setCurrentPage("login"); // Menuju ke halaman form login
+  };
+
+  // 4. Fungsi universal untuk kembali ke beranda
+  const handleGoHome = () => {
+    setCurrentPage("home");
+  };
 
   return (
-    <div className="landing-page">
-      <nav className="navbar">
-        <h2>🍽️ FoodLoop</h2>
-      </nav>
+    <div className="App">
+      {/* HALAMAN 1: HOME / MAIN PAGE */}
+      {currentPage === "home" && <Home onNavigateToLogin={handleGoToLogin} />}
 
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h2>{action} As</h2>
-
-            <button className="role-btn">🍱 Donor</button>
-
-            <button className="role-btn">🤝 Volunteer</button>
-
-            <button className="role-btn">
-              ❤️ Recipient
-            </button>
-
-            <button
-              className="close-btn"
-              onClick={() => setShowModal(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
+      {/* HALAMAN 2: FORM LOGIN / REGISTER */}
+      {currentPage === "login" && (
+        <AuthForm
+          onLoginSuccess={handleLoginSuccess}
+          onBrandClick={handleGoHome}
+        />
       )}
 
-      <div className="hero">
-        <h1>Welcome to FoodLoop</h1>
-
-        <p>
-          FoodLoop is a surplus food redistribution platform that
-          connects food donors with those in need. FoodLoop is
-          dedicated to minimizing food waste, eradicating hunger,
-          and creating a better and more sustainable future for
-          the planet.
-        </p>
-
-        <div className="button-group">
-          <button
-            className="signup-btn"
-            onClick={() => {
-              setAction("Sign Up");
-              setShowModal(true);
-            }}
-          >
-            Sign Up
-          </button>
-
-          <button
-            className="signin-btn"
-            onClick={() => {
-              setAction("Sign In");
-              setShowModal(true);
-            }}
-          >
-            Sign In
-          </button>
+      {/* HALAMAN 3: DASHBOARD (Baru terbuka setelah sukses dari form) */}
+      {currentPage === "dashboard" && (
+        <div>
+          {userRole === "donor" && (
+            <DonorDashboard onBrandClick={handleGoHome} />
+          )}
+          {userRole === "volunteer" && (
+            <VolunteerDashboard onBrandClick={handleGoHome} />
+          )}
+          {userRole === "beneficiary" && (
+            <BeneficiaryDashboard onBrandClick={handleGoHome} />
+          )}
         </div>
-      </div>
-
-      <section className="about">
-        <h2>About Us</h2>
-
-        <div className="features">
-          <div className="feature-card">
-            <h3>🍱 Easy Donate</h3>
-            <p>
-              Share any surplus food you have to minimize food
-              waste.
-            </p>
-          </div>
-
-          <div className="feature-card">
-            <h3>📍 Appropriate Distribution</h3>
-            <p>
-              Distribute surplus food to those in need and
-              eradicate hunger.
-            </p>
-          </div>
-
-          <div className="feature-card">
-            <h3>♻️ Minimize Food Waste</h3>
-            <p>
-              Reduce food waste for a better future for the
-              earth.
-            </p>
-          </div>
-        </div>
-      </section>
+      )}
     </div>
   );
 }
