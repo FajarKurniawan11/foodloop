@@ -1,0 +1,265 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(ellipse at 15% 20%, #1a5c42 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, #2a7a58 0%, transparent 48%),
+    radial-gradient(ellipse at 70% 85%, #0e4a30 0%, transparent 52%),
+    radial-gradient(ellipse at 25% 80%, #153d28 0%, transparent 48%),
+    linear-gradient(155deg, #0d3d27 0%, #1e6e4d 38%, #0f4530 68%, #071a12 100%);
+}
+
+/* ── Background glow blobs ─────────────────────────────────────────────────── */
+.auth-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.auth-blob--tl {
+  top: -100px;
+  left: -100px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(
+    circle,
+    rgba(86, 201, 154, 0.14) 0%,
+    transparent 70%
+  );
+}
+.auth-blob--br {
+  bottom: -120px;
+  right: -80px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(
+    circle,
+    rgba(26, 102, 69, 0.3) 0%,
+    transparent 70%
+  );
+}
+.auth-blob--gold {
+  top: 25%;
+  right: 8%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(
+    circle,
+    rgba(212, 168, 67, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #0b1a13;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 122, 86, 0.5);
+  padding: 44px 40px 36px;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(86, 201, 154, 0.08),
+    inset 0 1px 0 rgba(86, 201, 154, 0.07);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Subtle inner top glow */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(45, 155, 111, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Gold accent bar at top */
+.auth-card__accent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 168, 67, 0.6),
+    transparent
+  );
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Logo ──────────────────────────────────────────────────────────────────── */
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #56c99a;
+  margin-bottom: 22px;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: opacity 0.2s;
+}
+.auth-logo:hover {
+  opacity: 0.85;
+}
+.auth-logo__icon {
+  color: #d4a843;
+  font-size: 1rem;
+}
+
+/* ── Title ─────────────────────────────────────────────────────────────────── */
+.auth-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+
+/* ── Form ──────────────────────────────────────────────────────────────────── */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* ── Field ─────────────────────────────────────────────────────────────────── */
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #b8d9cc;
+  letter-spacing: 0.01em;
+}
+
+.auth-field input,
+.auth-field select {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: #153026;
+  color: #fff;
+  border: 1px solid #2d9b6f;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Custom dropdown arrow */
+.auth-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath stroke='%2356c99a' stroke-width='1.5' fill='none' d='M1 1l4.5 4.5L10 1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.auth-field select option {
+  background: #0b2e1e;
+  color: #e8f5ef;
+}
+
+.auth-field input::placeholder {
+  color: rgba(184, 217, 204, 0.3);
+}
+
+.auth-field input:focus,
+.auth-field select:focus {
+  border-color: rgba(86, 201, 154, 0.7);
+  background: #1a3d2a;
+  box-shadow: 0 0 0 3px rgba(86, 201, 154, 0.1);
+}
+
+/* ── Submit button ─────────────────────────────────────────────────────────── */
+.auth-btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2d9b6f 0%, #1e7a56 100%);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.22s;
+  box-shadow: 0 4px 18px rgba(45, 155, 111, 0.35);
+}
+.auth-btn:hover {
+  background: linear-gradient(135deg, #3ab583 0%, #2d9b6f 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 26px rgba(45, 155, 111, 0.45);
+}
+.auth-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 12px rgba(45, 155, 111, 0.3);
+}
+
+/* ── Switch (login ↔ register) ─────────────────────────────────────────────── */
+.auth-switch {
+  font-size: 0.83rem;
+  color: #b8d9cc;
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.auth-switch__link {
+  color: #56c99a;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.auth-switch__link:hover {
+  color: #d4a843;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 36px 24px 30px;
+    border-radius: 16px;
+  }
+  .auth-title {
+    font-size: 1.5rem;
+  }
+}
