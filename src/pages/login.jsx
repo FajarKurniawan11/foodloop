@@ -1,187 +1,111 @@
 import React, { useState } from "react";
+import "../styles/login.css";
 
 export default function AuthForm({ onLoginSuccess, onBrandClick }) {
   const [isRegister, setIsRegister] = useState(false);
   const [role, setRole] = useState("donor");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
- const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  if (isRegister) {
-    alert("Registrasi berhasil! Silakan login.");
-
-    // Kosongkan form
-    setEmail("");
-    setPassword("");
-
-    // Kembali ke halaman login
-    setIsRegister(false);
-  } else {
-  console.log("Role yang dipilih:", role);
-
-  if (onLoginSuccess) {
-    onLoginSuccess(role);
-  }
-
-  setEmail("");
-  setPassword("")
-
-    // Kosongkan form setelah login
-    setEmail("");
-    setPassword("");
-  }
-};
+    if (isRegister) {
+      alert("Registration successful! Please log in.");
+      setEmail("");
+      setPassword("");
+      setUsername("");
+      setIsRegister(false);
+    } else {
+      console.log("Selected role:", role);
+      if (onLoginSuccess) {
+        onLoginSuccess(role);
+      }
+      setEmail("");
+      setPassword("");
+    }
+  };
 
   return (
-    <div
-      style={{
-        padding: "40px",
-        maxWidth: "400px",
-        margin: "80px auto",
-        backgroundColor: "#0b1a13",
-        borderRadius: "12px",
-        border: "1px solid #1e7a56",
-        fontFamily: "sans-serif",
-      }}
-    >
-      {/* Tombol Logo kembali ke Beranda */}
-      <div
-        onClick={onBrandClick}
-        style={{
-          cursor: "pointer",
-          fontSize: "24px",
-          fontWeight: "bold",
-          color: "#56c99a",
-          marginBottom: "20px",
-          textAlign: "center",
-        }}
-      >
-        ✦ FoodLoop
-      </div>
+    <div className="auth-page">
+      <div className="auth-blob auth-blob--tl" />
+      <div className="auth-blob auth-blob--br" />
+      <div className="auth-blob auth-blob--gold" />
 
-      <form onSubmit={handleSubmit}>
-        <h2
-          style={{ color: "#fff", textAlign: "center", marginBottom: "25px" }}
-        >
+      <div className="auth-card">
+        <div className="auth-logo" onClick={onBrandClick}>
+          <span className="auth-logo__icon">✦</span> FoodLoop
+        </div>
+
+        <h2 className="auth-title">
           {isRegister ? "Create Account" : "Welcome Back"}
         </h2>
 
-        <div style={{ marginBottom: "15px" }}>
-          <label
-            style={{ color: "#b8d9cc", display: "block", marginBottom: "5px" }}
-          >
-            Email Address
-          </label>
-         <input
-  type="email"
-  required
-  placeholder="name@example.com"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  style={{
-    width: "100%",
-    padding: "10px",
-    borderRadius: "6px",
-    backgroundColor: "#153026",
-    color: "#fff",
-    border: "1px solid #2d9b6f",
-    boxSizing: "border-box",
-  }}
-/>
-        </div>
+        <form onSubmit={handleSubmit} className="auth-form">
+          {isRegister && (
+            <div className="auth-field">
+              <label>Username</label>
+              <input
+                type="text"
+                required
+                placeholder="yourname"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+          )}
+          <div className="auth-field">
+            <label>Email Address</label>
+            <input
+              type="email"
+              required
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-        <div style={{ marginBottom: "20px" }}>
-          <label
-            style={{ color: "#b8d9cc", display: "block", marginBottom: "5px" }}
-          >
-            Password
-          </label>
-          <input
-  type="password"
-  required
-  placeholder="••••••••"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-  style={{
-    width: "100%",
-    padding: "10px",
-    borderRadius: "6px",
-    backgroundColor: "#153026",
-    color: "#fff",
-    border: "1px solid #2d9b6f",
-    boxSizing: "border-box",
-  }}
-/>
-        </div>
+          <div className="auth-field">
+            <label>Password</label>
+            <input
+              type="password"
+              required
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        {/* INPUT PILIHAN ROLE - INI KUNCINYA */}
-        <div style={{ marginBottom: "25px" }}>
-          <label
-            style={{ color: "#b8d9cc", display: "block", marginBottom: "5px" }}
-          >
-            Select Your Role
-          </label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              borderRadius: "6px",
-              backgroundColor: "#153026",
-              color: "#fff",
-              border: "1px solid #2d9b6f",
-              cursor: "pointer",
-            }}
-          >
-            <option value="donor">Food Donor (Restaurant/Cafe)</option>
-            <option value="volunteer">Volunteer (Courier/Driver)</option>
-            <option value="beneficiary">Beneficiary (Family/NGO)</option>
-          </select>
-        </div>
+          {/* Role selector — register only */}
+          {isRegister && (
+            <div className="auth-field">
+              <label>Select Your Role</label>
+              <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <option value="donor">Food Donor (Restaurant/Cafe)</option>
+                <option value="volunteer">Volunteer (Courier/Driver)</option>
+                <option value="beneficiary">Beneficiary (Family/NGO)</option>
+              </select>
+            </div>
+          )}
 
-        {/* Tombol Sign In / Sign Up */}
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            padding: "12px",
-            borderRadius: "6px",
-            backgroundColor: "#2d9b6f",
-            color: "#fff",
-            border: "none",
-            fontWeight: "bold",
-            cursor: "pointer",
-            fontSize: "16px",
-          }}
-        >
-          {isRegister ? "Sign Up" : "Sign In"}
-        </button>
+          <button type="submit" className="auth-btn">
+            {isRegister ? "Sign Up" : "Sign In"}
+          </button>
+        </form>
 
-        {/* Toggle Login/Register */}
-        <p
-          style={{
-            color: "#b8d9cc",
-            textAlign: "center",
-            marginTop: "20px",
-            fontSize: "14px",
-          }}
-        >
+        <p className="auth-switch">
           {isRegister ? "Already have an account? " : "Don't have an account? "}
           <span
+            className="auth-switch__link"
             onClick={() => setIsRegister(!isRegister)}
-            style={{
-              color: "#56c99a",
-              cursor: "pointer",
-              textDecoration: "underline",
-            }}
           >
             {isRegister ? "Login here" : "Register here"}
           </span>
         </p>
-      </form>
+
+        <div className="auth-card__accent" />
+      </div>
     </div>
   );
 }
