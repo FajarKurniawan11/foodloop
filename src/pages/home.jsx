@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/home.css";
+import "../styles/dashboard.css";
 
 // DATA (Tetap aman tidak diubah)
 const GHI_DATA_2024 = [
